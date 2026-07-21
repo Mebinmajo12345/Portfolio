@@ -3,385 +3,488 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mebin Majo — Operations Executive</title>
+<title>Mebin Majo | Portfolio</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg: #10141b;
-    --panel: #171d26;
-    --panel-2: #1e2530;
-    --line: #2a3340;
-    --text: #e9ecf1;
-    --muted: #8a94a6;
-    --amber: #f5a623;
-    --amber-dim: #7a5719;
-    --steel: #6fa3d8;
-    --green: #4caf7d;
-    --radius: 3px;
+    --navy: #1c3a5e;
+    --navy-2: #14293f;
+    --amber: #c9884f;
+    --amber-light: #f6e9db;
+    --bg: #ffffff;
+    --bg-soft: #f5f7f9;
+    --text: #1f2a37;
+    --muted: #667080;
+    --border: #e6e9ee;
+    --radius: 12px;
   }
   *{box-sizing:border-box;}
   html{scroll-behavior:smooth;}
   body{
-    margin:0;
-    background:var(--bg);
-    color:var(--text);
-    font-family:'Inter',sans-serif;
-    line-height:1.6;
-    -webkit-font-smoothing:antialiased;
+    margin:0; background:var(--bg); color:var(--text);
+    font-family:'Inter',sans-serif; line-height:1.65; -webkit-font-smoothing:antialiased;
   }
-  ::selection{background:var(--amber);color:#10141b;}
-  a{color:inherit;}
+  h1,h2,h3,h4{font-family:'Sora',sans-serif; color:var(--navy); margin:0;}
+  a{color:inherit; text-decoration:none;}
   :focus-visible{outline:2px solid var(--amber); outline-offset:3px;}
-
-  .wrap{max-width:1000px;margin:0 auto;padding:0 28px;}
-
-  /* faint blueprint grid backdrop */
-  .grid-bg{
-    position:fixed; inset:0; z-index:-1;
-    background-image:
-      linear-gradient(rgba(111,163,216,0.05) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(111,163,216,0.05) 1px, transparent 1px);
-    background-size: 40px 40px;
-    mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 40%, transparent 90%);
-  }
-
-  h1,h2,h3{font-family:'Oswald',sans-serif; text-transform:uppercase; letter-spacing:0.03em; margin:0;}
-  .mono{font-family:'IBM Plex Mono',monospace;}
+  .wrap{max-width:1120px; margin:0 auto; padding:0 32px;}
+  section{padding:88px 0;}
+  .soft{background:var(--bg-soft);}
   .eyebrow{
-    font-family:'IBM Plex Mono',monospace;
-    color:var(--amber);
-    font-size:12px;
-    letter-spacing:0.18em;
-    text-transform:uppercase;
-    display:flex; align-items:center; gap:10px;
+    display:flex; align-items:center; gap:12px; color:var(--amber);
+    font-weight:600; font-size:15px; margin-bottom:20px;
   }
-  .eyebrow::before{content:"";width:8px;height:8px;background:var(--amber);border-radius:1px;flex:none;}
+  .eyebrow::before{content:""; width:4px; height:20px; background:var(--amber); border-radius:2px;}
+  .sec-title{font-size:34px; font-weight:700; margin-bottom:8px;}
+
+  /* ---------- MOTION ---------- */
+  .reveal{opacity:0; transform:translateY(24px); transition:opacity .7s ease, transform .7s ease;}
+  .reveal.in-view{opacity:1; transform:translateY(0);}
+  .reveal-stagger.in-view > *{opacity:1; transform:translateY(0);}
+  .reveal-stagger > *{opacity:0; transform:translateY(18px); transition:opacity .6s ease, transform .6s ease;}
+  .reveal-stagger.in-view > *:nth-child(1){transition-delay:.05s;}
+  .reveal-stagger.in-view > *:nth-child(2){transition-delay:.12s;}
+  .reveal-stagger.in-view > *:nth-child(3){transition-delay:.19s;}
+  .reveal-stagger.in-view > *:nth-child(4){transition-delay:.26s;}
+  .reveal-stagger.in-view > *:nth-child(5){transition-delay:.33s;}
+  .reveal-stagger.in-view > *:nth-child(6){transition-delay:.40s;}
+  .hero h1, .hero .eyebrow, .hero p.desc, .hero .hero-actions, .hero-art{
+    opacity:0; transform:translateY(18px); animation:heroIn .7s ease forwards;
+  }
+  .hero .eyebrow{animation-delay:.05s;}
+  .hero h1{animation-delay:.15s;}
+  .hero p.desc{animation-delay:.25s;}
+  .hero .hero-actions{animation-delay:.35s;}
+  .hero-art{animation-delay:.2s;}
+  @keyframes heroIn{to{opacity:1; transform:translateY(0);}}
+
+  .stat-card, .exp-card, .edu-card, .cert-card, .contact-card, .tool-row, .chip{
+    transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+  }
+  .stat-card:hover, .exp-card:hover, .edu-card:hover, .cert-card:hover, .contact-card:hover{
+    transform:translateY(-4px); box-shadow:0 12px 28px rgba(28,58,94,0.1); border-color:var(--amber);
+  }
+  .chip:hover{transform:translateY(-2px); border-color:var(--amber); color:var(--amber);}
+  .btn{transition:transform .2s ease, opacity .15s ease, background .15s ease;}
+  .btn:hover{transform:translateY(-2px);}
+  .logo-mark{transition:transform .3s ease;}
+  .brand:hover .logo-mark{transform:rotate(-8deg);}
+
+  @media (prefers-reduced-motion: reduce){
+    *{scroll-behavior:auto !important; transition:none !important; animation:none !important;}
+    .reveal, .reveal-stagger > *, .hero h1, .hero .eyebrow, .hero p.desc, .hero .hero-actions, .hero-art{
+      opacity:1 !important; transform:none !important;
+    }
+  }
+
+  /* ---------- NAV ---------- */
+  nav{
+    position:sticky; top:0; z-index:50; background:rgba(255,255,255,0.92);
+    backdrop-filter:blur(8px); border-bottom:1px solid var(--border);
+  }
+  .nav-inner{
+    max-width:1120px; margin:0 auto; padding:16px 32px;
+    display:flex; align-items:center; justify-content:space-between;
+  }
+  .brand{display:flex; align-items:center; gap:12px; font-weight:700; font-size:18px; color:var(--navy); font-family:'Sora',sans-serif;}
+  .logo-mark{
+    width:38px; height:38px; background:var(--navy); border-radius:9px;
+    display:flex; align-items:center; justify-content:center;
+    color:#fff; font-family:'Sora',sans-serif; font-weight:700; font-size:17px; flex:none;
+  }
+  .nav-links{display:flex; gap:36px; font-weight:500; color:var(--text); font-size:15px;}
+  .nav-links a{transition:color .15s ease;}
+  .nav-links a:hover{color:var(--amber);}
+  .btn{
+    display:inline-flex; align-items:center; gap:9px; font-weight:600; font-size:14.5px;
+    padding:11px 20px; border-radius:9px; cursor:pointer; border:1px solid transparent;
+    transition:opacity .15s ease, background .15s ease;
+  }
+  .btn-primary{background:var(--navy); color:#fff;}
+  .btn-primary:hover{opacity:0.9;}
+  .btn-outline{background:transparent; color:var(--navy); border-color:var(--navy);}
+  .btn-outline:hover{background:var(--navy); color:#fff;}
+  .btn svg{width:15px; height:15px;}
+  .nav-mobile-hide{display:flex; gap:36px;}
 
   /* ---------- HERO ---------- */
-  header.hero{
-    padding:100px 0 70px;
-    border-bottom:1px solid var(--line);
-    position:relative;
+  header.hero{background:var(--bg-soft); padding:90px 0 90px; overflow:hidden;}
+  .hero-grid{display:grid; grid-template-columns:1.05fr 0.85fr; gap:56px; align-items:center;}
+  .hero h1{font-size:clamp(38px,5.5vw,58px); font-weight:800; line-height:1.05; margin:16px 0 20px;}
+  .hero p.desc{font-size:17.5px; color:var(--muted); max-width:520px; margin:0 0 32px;}
+  .hero-actions{display:flex; gap:14px; flex-wrap:wrap;}
+  .hero-art{
+    background:var(--amber-light); border-radius:22px; padding:40px;
+    display:flex; align-items:center; justify-content:center; aspect-ratio:1/1;
   }
-  .hero-top{display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:24px;}
-  .hero h1{font-size:clamp(32px,6.5vw,64px); line-height:1; margin:14px 0 8px; font-weight:700; white-space:nowrap;}
-  .hero .role{font-size:18px; color:var(--steel); font-family:'IBM Plex Mono',monospace; letter-spacing:0.02em;}
-  .status-tag{
-    font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:0.1em;
-    border:1px solid var(--green); color:var(--green); padding:6px 12px; border-radius:20px;
-    display:inline-flex; align-items:center; gap:8px; white-space:nowrap; height:fit-content;
-  }
-  .status-tag .dot{width:7px;height:7px;background:var(--green);border-radius:50%;box-shadow:0 0 0 0 rgba(76,175,125,0.6); animation:pulse 2s infinite;}
-  @keyframes pulse{
-    0%{box-shadow:0 0 0 0 rgba(76,175,125,0.5);}
-    70%{box-shadow:0 0 0 8px rgba(76,175,125,0);}
-    100%{box-shadow:0 0 0 0 rgba(76,175,125,0);}
-  }
-  .summary{max-width:640px; color:#c3cad6; font-size:16px; margin:26px 0 0;}
-  .contact-row{display:flex; flex-wrap:wrap; gap:10px; margin-top:28px;}
-  .contact-pill{
-    font-family:'IBM Plex Mono',monospace; font-size:13px;
-    border:1px solid var(--line); background:var(--panel);
-    padding:9px 14px; border-radius:20px; color:var(--text); text-decoration:none;
-    transition:border-color .15s ease, color .15s ease;
-  }
-  .contact-pill:hover{border-color:var(--amber); color:var(--amber);}
-  .resume-btn{
-    font-family:'IBM Plex Mono',monospace; font-size:13px; font-weight:600;
-    background:var(--amber); color:#10141b; border:1px solid var(--amber);
-    padding:9px 16px; border-radius:20px; text-decoration:none;
-    display:inline-flex; align-items:center; gap:8px;
-    transition:opacity .15s ease;
-  }
-  .resume-btn:hover{opacity:0.85;}
-  .resume-btn svg{width:14px;height:14px;}
+  .hero-art svg{width:100%; height:100%;}
 
-  /* route line */
-  .route{margin-top:56px;}
-  .route-track{
-    position:relative; display:flex; justify-content:space-between; align-items:center;
-    padding-top:6px;
-  }
-  .route-track::before{
-    content:""; position:absolute; top:11px; left:0; right:0; height:2px; background:var(--line);
-  }
-  .route-track::after{
-    content:""; position:absolute; top:11px; left:0; width:100%; height:2px; background:var(--amber);
-  }
-  .route-stop{position:relative; z-index:1; text-align:left; flex:1;}
-  .route-stop .node{width:22px;height:22px;border-radius:50%;background:var(--bg);border:2px solid var(--amber); display:flex; align-items:center; justify-content:center;}
-  .route-stop.done .node{background:var(--amber);}
-  .route-stop .node::after{content:"";width:8px;height:8px;background:var(--amber);border-radius:50%;}
-  .route-stop.done .node::after{background:var(--bg);}
-  .route-label{margin-top:10px; font-family:'IBM Plex Mono',monospace; font-size:11.5px; color:var(--muted); max-width:150px;}
-  .route-label strong{display:block; color:var(--text); font-size:13px; margin-bottom:2px; font-weight:600;}
+  /* ---------- STATS ---------- */
+  .stat-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:24px; margin:36px 0 40px;}
+  .stat-card{border:1px solid var(--border); border-radius:var(--radius); padding:28px 26px; background:var(--bg);}
+  .stat-card .num{font-family:'Sora',sans-serif; font-size:36px; font-weight:800; color:var(--amber); margin-bottom:10px;}
+  .stat-card .label{color:var(--muted); font-size:14.5px;}
+  .summary-text{color:var(--muted); font-size:16.5px; max-width:840px;}
 
-  /* ---------- SECTIONS ---------- */
-  section{padding:64px 0; border-bottom:1px solid var(--line);}
-  .sec-head{display:flex; align-items:baseline; gap:16px; margin-bottom:34px;}
-  .sec-head h2{font-size:28px;}
-  .sec-head .idx{color:var(--muted); font-family:'IBM Plex Mono',monospace; font-size:13px;}
-  .sec-rule{flex:1; height:1px; background:var(--line);}
+  /* ---------- EXPERIENCE ---------- */
+  .exp-card{
+    background:var(--bg); border:1px solid var(--border); border-left:4px solid var(--amber);
+    border-radius:var(--radius); padding:32px 34px; margin-bottom:24px;
+  }
+  .exp-top{display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:14px; margin-bottom:22px;}
+  .exp-top h3{font-size:23px; font-weight:700; margin-bottom:4px;}
+  .exp-top .company{color:var(--amber); font-weight:600; font-size:15px;}
+  .date-pill{
+    background:var(--amber-light); color:var(--amber); font-weight:600; font-size:13.5px;
+    padding:8px 16px; border-radius:20px; white-space:nowrap;
+  }
+  .exp-card ul{margin:0; padding:0; list-style:none;}
+  .exp-card li{position:relative; padding-left:22px; margin-bottom:13px; color:#3c4756; font-size:15.5px;}
+  .exp-card li:last-child{margin-bottom:0;}
+  .exp-card li::before{content:""; position:absolute; left:0; top:9px; width:7px; height:7px; border-radius:50%; background:var(--amber);}
 
-  /* manifest / experience cards */
-  .manifest{
-    background:var(--panel); border:1px solid var(--line); border-radius:var(--radius);
-    margin-bottom:24px; overflow:hidden;
+  /* ---------- EDUCATION ---------- */
+  .edu-card{
+    background:var(--bg); border:1px solid var(--border); border-left:4px solid var(--amber);
+    border-radius:var(--radius); padding:32px 34px;
   }
-  .manifest-head{
-    display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;
-    padding:20px 24px; border-bottom:1px dashed var(--line); background:var(--panel-2);
-  }
-  .manifest-head .co h3{font-size:20px;}
-  .manifest-head .co span{color:var(--muted); font-size:14px; font-family:'IBM Plex Mono',monospace;}
-  .badge{
-    font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:0.1em; padding:5px 10px; border-radius:20px;
-  }
-  .badge.active{border:1px solid var(--green); color:var(--green);}
-  .badge.done{border:1px solid var(--muted); color:var(--muted);}
-  .tracking{font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--muted);}
-  .manifest-body{padding:22px 24px;}
-  .manifest-body ul{margin:0; padding:0; list-style:none;}
-  .manifest-body li{
-    position:relative; padding-left:22px; margin-bottom:12px; font-size:15px; color:#d5dae2;
-  }
-  .manifest-body li:last-child{margin-bottom:0;}
-  .manifest-body li::before{
-    content:"→"; position:absolute; left:0; color:var(--amber); font-family:'IBM Plex Mono',monospace;
-  }
+  .edu-card h3{font-size:24px; margin-bottom:8px;}
+  .edu-card .field{color:var(--amber); font-weight:600; margin-bottom:8px; font-size:15px;}
+  .edu-card .school{color:var(--muted); font-size:15px;}
 
-  /* competency chips */
+  /* ---------- SKILLS ---------- */
+  .skill-block h4{font-size:15px; text-transform:uppercase; letter-spacing:0.06em; color:var(--navy); margin-bottom:16px;}
   .chip-row{display:flex; flex-wrap:wrap; gap:10px;}
   .chip{
-    font-family:'IBM Plex Mono',monospace; font-size:13px; padding:8px 14px;
-    background:var(--panel); border:1px solid var(--line); border-radius:20px; color:#d5dae2;
+    background:var(--bg); border:1px solid var(--border); border-radius:20px;
+    padding:9px 16px; font-size:14px; color:var(--text); font-weight:500;
   }
-
-  /* technical skills */
-  .skill-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:16px; margin-top:28px;}
-  .skill-card{background:var(--panel); border:1px solid var(--line); border-radius:var(--radius); padding:18px 20px;}
-  .skill-card h4{font-family:'IBM Plex Mono',monospace; font-size:15px; font-weight:600; margin:0 0 4px; color:var(--text);}
-  .skill-card .level{font-size:11px; color:var(--amber); font-family:'IBM Plex Mono',monospace; letter-spacing:0.08em; margin-bottom:10px; display:block;}
-  .skill-card p{margin:0; font-size:13.5px; color:var(--muted); line-height:1.55;}
-
-  /* certifications - stamp style */
-  .cert-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(210px,1fr)); gap:18px;}
-  .cert{
-    border:2px solid var(--amber-dim); border-radius:var(--radius); padding:20px;
-    position:relative; background:var(--panel);
+  .skills-cols{display:grid; grid-template-columns:1fr 1fr; gap:44px; margin-top:36px;}
+  .tool-list{display:flex; flex-direction:column; gap:14px;}
+  .tool-row{
+    display:flex; justify-content:space-between; align-items:center;
+    background:var(--bg); border:1px solid var(--border); border-radius:10px; padding:14px 18px;
   }
-  .cert::before{
-    content:"CERT"; position:absolute; top:16px; right:16px; font-family:'IBM Plex Mono',monospace;
-    font-size:10px; letter-spacing:0.12em; color:var(--muted);
+  .tool-row .name{font-weight:600; font-size:14.5px;}
+  .tool-row .lvl{font-size:12px; font-weight:600; color:var(--amber); background:var(--amber-light); padding:4px 10px; border-radius:12px;}
+
+  /* ---------- CERTS ---------- */
+  .cert-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:16px;}
+  .cert-card{border:1px solid var(--border); border-radius:10px; padding:20px 22px; background:var(--bg); display:flex; align-items:center; gap:14px;}
+  .cert-card .ico{width:38px; height:38px; border-radius:9px; background:var(--amber-light); display:flex; align-items:center; justify-content:center; flex:none;}
+  .cert-card .ico svg{width:18px; height:18px; color:var(--amber);}
+  .cert-card span{font-weight:600; font-size:14.5px;}
+
+  /* ---------- CONTACT ---------- */
+  .contact-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:22px; margin-bottom:56px;}
+  .contact-card{
+    border:1px solid var(--border); border-radius:var(--radius); padding:38px 26px; text-align:center; background:var(--bg);
   }
-  .cert h4{font-size:16px; font-weight:600; font-family:'Inter',sans-serif; text-transform:none; max-width:75%; letter-spacing:0; margin-bottom:6px;}
-  .cert span{font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--muted);}
+  .contact-card .ico{
+    width:52px; height:52px; border-radius:50%; border:1.5px solid var(--amber); color:var(--amber);
+    display:flex; align-items:center; justify-content:center; margin:0 auto 18px;
+  }
+  .contact-card .ico svg{width:22px; height:22px;}
+  .contact-card h4{font-size:17px; margin-bottom:8px;}
+  .contact-card a{color:var(--amber); font-weight:500; font-size:14.5px; word-break:break-word;}
 
-  /* education / languages */
-  .edu-card{background:var(--panel); border:1px solid var(--line); border-radius:var(--radius); padding:24px; display:flex; justify-content:space-between; flex-wrap:wrap; gap:16px;}
-  .edu-card h3{font-size:19px; margin-bottom:6px;}
-  .edu-card .school{color:var(--steel); font-family:'IBM Plex Mono',monospace; font-size:14px;}
-  .edu-card .dates{font-family:'IBM Plex Mono',monospace; color:var(--muted); font-size:13px; align-self:center;}
+  .cta-banner{
+    background:linear-gradient(120deg, var(--navy), #2a4a72);
+    border-radius:20px; padding:56px 40px; text-align:center; color:#fff;
+  }
+  .cta-banner h3{color:#fff; font-size:27px; margin-bottom:14px;}
+  .cta-banner p{color:#c9d4e0; max-width:560px; margin:0 auto 26px; font-size:15.5px;}
+  .cta-banner .btn-primary{background:var(--amber); color:#1c1206;}
 
-  .lang-row{display:flex; gap:12px; margin-top:20px; flex-wrap:wrap;}
-  .lang-pill{font-family:'IBM Plex Mono',monospace; font-size:13px; color:var(--muted); border:1px solid var(--line); padding:7px 14px; border-radius:20px;}
+  footer{padding:34px 0; text-align:center; color:var(--muted); font-size:13.5px; border-top:1px solid var(--border);}
 
-  footer{padding:56px 0 70px; text-align:center;}
-  footer .eyebrow{justify-content:center;}
-  footer h2{font-size:26px; margin:16px 0 10px;}
-  footer p{color:var(--muted); font-size:14px; margin-bottom:26px;}
-  footer .contact-row{justify-content:center;}
-  .end-line{margin-top:50px; font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--line); letter-spacing:0.2em;}
-
-  @media (max-width:640px){
-    header.hero{padding:70px 0 50px;}
-    .route-track{flex-wrap:wrap; row-gap:34px;}
-    .route-track::before, .route-track::after{display:none;}
-    .route-label{max-width:none;}
+  @media (max-width:860px){
+    .hero-grid{grid-template-columns:1fr;}
+    .hero-art{max-width:420px; margin:0 auto;}
+    .stat-grid{grid-template-columns:1fr;}
+    .skills-cols{grid-template-columns:1fr;}
+    .contact-grid{grid-template-columns:1fr;}
+    .nav-links{display:none;}
   }
   @media (prefers-reduced-motion: reduce){
-    *{animation:none !important; transition:none !important;}
-    html{scroll-behavior:auto;}
+    *{scroll-behavior:auto !important; transition:none !important;}
   }
 </style>
 </head>
 <body>
-<div class="grid-bg"></div>
+
+<nav>
+  <div class="nav-inner">
+    <div class="brand"><span class="logo-mark">M</span>Mebin Majo</div>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#experience">Experience</a>
+      <a href="#skills">Skills</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <a class="btn btn-primary" href="Mebin_Majo_Resume.pdf" download>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      Resume
+    </a>
+  </div>
+</nav>
 
 <header class="hero">
-  <div class="wrap">
-    <div class="hero-top">
-      <div>
-        <div class="eyebrow">PORTFOLIO</div>
-        <h1>Mebin Majo</h1>
-        <div class="role">Operations Executive — Last Mile Logistics &amp; Supply Chain</div>
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow">Operations Executive</div>
+      <h1>Mebin Majo</h1>
+      <p class="desc">Supply Chain &amp; Logistics Operations Specialist with expertise in last-mile delivery, dispatch management, and data-driven process optimization across leading Quick Commerce platforms.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#contact">Get In Touch
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+        <a class="btn btn-outline" href="Mebin_Majo_Resume.pdf" download>View Resume</a>
       </div>
-      <div class="status-tag"><span class="dot"></span>BENGALURU, INDIA</div>
     </div>
+    <div class="hero-art">
+      <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="200" cy="150" r="80" fill="#1c3a5e"/>
+        <path d="M120 150 h55" stroke="#c9884f" stroke-width="3" fill="none"/>
+        <circle cx="120" cy="150" r="5" fill="#c9884f"/>
+        <path d="M175 165 l15 -30 l15 20 l15 -45" stroke="#f6e9db" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        <rect x="205" y="125" width="10" height="30" fill="#f6e9db"/>
+        <rect x="220" y="110" width="10" height="45" fill="#f6e9db"/>
+        <rect x="235" y="135" width="10" height="20" fill="#f6e9db"/>
+        <circle cx="245" cy="165" r="16" fill="none" stroke="#f6e9db" stroke-width="4"/>
+        <line x1="256" y1="176" x2="268" y2="188" stroke="#f6e9db" stroke-width="4" stroke-linecap="round"/>
+        <path d="M280 150 h50" stroke="#c9884f" stroke-width="3" fill="none"/>
+        <path d="M320 130 a25 25 0 1 1 -0.1 0" fill="none" stroke="#c9884f" stroke-width="3"/>
+        <polygon points="330,105 336,113 324,113" fill="#c9884f"/>
 
-    <p class="summary">Detail-oriented operations professional with hands-on experience in dispatch planning, warehouse coordination, and last-mile delivery across Quick Commerce platforms — Blinkit, Zepto, Instamart, and BigBasket. Builds MIS reports and Power BI dashboards to turn logistics data into decisions, and keeps invoice, GRN, and PO reconciliation clean and on schedule.</p>
+        <rect x="40" y="230" width="90" height="70" rx="4" fill="#1c3a5e"/>
+        <polygon points="40,230 85,195 130,230" fill="#1c3a5e"/>
+        <rect x="70" y="260" width="24" height="40" fill="#f6e9db"/>
 
-    <div class="contact-row">
-      <a class="resume-btn" href="Mebin_Majo_Resume.pdf" download="Mebin_Majo_Resume.pdf">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-        Download Resume
-      </a>
-      <a class="contact-pill" href="tel:+919562271474">+91 95622 71474</a>
-      <a class="contact-pill" href="mailto:mebinmajo720@gmail.com">mebinmajo720@gmail.com</a>
-      <a class="contact-pill" href="https://linkedin.com/in/mebin-majo" target="_blank" rel="noopener">linkedin.com/in/mebin-majo</a>
-    </div>
+        <rect x="55" y="280" width="34" height="28" fill="#c9884f"/>
+        <rect x="95" y="290" width="26" height="18" fill="#c9884f"/>
+        <rect x="60" y="255" width="20" height="20" fill="#c9884f" opacity="0.7"/>
 
-    <div class="route">
-      <div class="route-track">
-        <div class="route-stop done">
-          <div class="node"></div>
-          <div class="route-label"><strong>April 2025</strong>Operations Intern — Signature Motors India</div>
-        </div>
-        <div class="route-stop done">
-          <div class="node"></div>
-          <div class="route-label"><strong>Dec 2025 →</strong>Operations Executive — Bajo Foods Pvt. Ltd.</div>
-        </div>
-      </div>
+        <rect x="150" y="270" width="110" height="40" rx="3" fill="#1c3a5e"/>
+        <rect x="150" y="255" width="45" height="18" rx="2" fill="#1c3a5e"/>
+        <circle cx="175" cy="312" r="10" fill="#14293f"/>
+        <circle cx="230" cy="312" r="10" fill="#14293f"/>
+
+        <rect x="300" y="255" width="60" height="55" fill="#c9884f" opacity="0.85"/>
+        <path d="M300 255 l30 -18 l30 18" fill="#c9884f" opacity="0.85"/>
+        <path d="M300 340 q60 -30 120 0" fill="none" stroke="#1c3a5e" stroke-width="4" opacity="0.5"/>
+        <circle cx="340" cy="220" r="26" fill="none" stroke="#c9884f" stroke-width="3" opacity="0.6"/>
+        <line x1="340" y1="194" x2="340" y2="246" stroke="#c9884f" stroke-width="2" opacity="0.4"/>
+        <line x1="314" y1="220" x2="366" y2="220" stroke="#c9884f" stroke-width="2" opacity="0.4"/>
+      </svg>
     </div>
   </div>
 </header>
 
-<section id="experience">
+<section id="about" class="reveal">
   <div class="wrap">
-    <div class="sec-head"><span class="idx">01</span><h2>Experience</h2><div class="sec-rule"></div></div>
+    <div class="eyebrow">About</div>
+    <h2 class="sec-title">Professional Summary</h2>
+    <div class="stat-grid reveal-stagger">
+      <div class="stat-card">
+        <div class="num" id="tenureStat">—</div>
+        <div class="label">Current Role at Bajo Foods</div>
+      </div>
+      <div class="stat-card">
+        <div class="num">4</div>
+        <div class="label">Quick Commerce Platforms Managed</div>
+      </div>
+      <div class="stat-card">
+        <div class="num">5</div>
+        <div class="label">Core Tools &amp; Platforms Used</div>
+      </div>
+    </div>
+    <p class="summary-text">Detail-oriented Operations Executive with hands-on experience in logistics operations, supply chain coordination, and last-mile delivery within fast-paced Quick Commerce environments. Skilled in dispatch planning, warehouse coordination, and vendor and transporter management across platforms including Blinkit, Zepto, Instamart, and BigBasket. Proficient in ERPNext, Microsoft Excel, Google Sheets, and Power BI for MIS reporting, KPI tracking, and data-driven process improvement. Experienced in invoice and GRN reconciliation, PO management, and RTO analysis to strengthen delivery performance and operational accuracy.</p>
+  </div>
+</section>
 
-    <div class="manifest">
-      <div class="manifest-head">
-        <div class="co">
-          <h3>Bajo Foods Pvt. Ltd.</h3>
-          <span>Operations Executive · December 2025 – Present</span>
+<section id="experience" class="soft reveal">
+  <div class="wrap">
+    <div class="eyebrow">Career</div>
+    <h2 class="sec-title" style="margin-bottom:36px;">Professional Experience</h2>
+
+    <div class="exp-card">
+      <div class="exp-top">
+        <div>
+          <h3>Operations Executive</h3>
+          <div class="company">Bajo Foods Pvt. Ltd.</div>
         </div>
-        <span class="badge active">CURRENT</span>
+        <div class="date-pill">December 2025 – Present</div>
       </div>
-      <div class="manifest-body">
-        <ul>
-          <li>Manage last-mile logistics end-to-end, coordinating daily dispatch planning with warehouse teams for on-time order fulfillment.</li>
-          <li>Schedule warehouse delivery appointments for Blinkit, Zepto, Instamart, and BigBasket, strengthening dispatch accuracy.</li>
-          <li>Coordinate with drivers, transporters, warehouse POCs, and courier partners to streamline shipment tracking.</li>
-          <li>Create and validate invoices and delivery notes, and punch and manage Purchase Orders in ERPNext.</li>
-          <li>Perform Invoice-vs-GRN and PO-vs-Invoice reconciliation, reducing quantity mismatches.</li>
-          <li>Track weekly and monthly RTO percentage by channel to support reverse logistics decisions.</li>
-          <li>Prepare daily, weekly, and monthly MIS and KPI reports; build Power BI dashboards for supply chain analytics.</li>
-          <li>Partner cross-functionally with warehouse, procurement, and transportation teams to resolve operational exceptions.</li>
-        </ul>
-      </div>
+      <ul>
+        <li>Manage Last Mile Logistics Operations end-to-end, coordinating daily dispatch planning with warehouse teams to ensure timely order fulfillment.</li>
+        <li>Schedule and manage warehouse delivery appointments for leading Quick Commerce platforms including Blinkit, Zepto, Instamart, and BigBasket.</li>
+        <li>Coordinate with drivers, transporters, warehouse POCs, and courier partners to streamline shipment tracking.</li>
+        <li>Create and validate invoices and delivery notes, and punch and manage Purchase Orders in ERPNext.</li>
+        <li>Perform Invoice vs GRN reconciliation and PO vs Invoice reconciliation, increasing reconciliation accuracy and reducing quantity mismatches.</li>
+        <li>Track weekly and monthly RTO percentage on a channel-wise basis, supporting RTO analysis and reverse logistics decision-making.</li>
+        <li>Prepare daily, weekly, and monthly MIS and logistics KPI reports, and build Power BI dashboards for supply chain analytics.</li>
+        <li>Partner cross-functionally with warehouse, procurement, and transportation teams to resolve operational exceptions.</li>
+      </ul>
     </div>
 
-    <div class="manifest">
-      <div class="manifest-head">
-        <div class="co">
-          <h3>Signature Motors India Pvt. Ltd.</h3>
-          <span>Operations Intern · April 1 – 30, 2025</span>
+    <div class="exp-card">
+      <div class="exp-top">
+        <div>
+          <h3>Operations Intern</h3>
+          <div class="company">Signature Motors India Pvt. Ltd.</div>
         </div>
-        <span class="badge done">PREVIOUS</span>
+        <div class="date-pill">April 1 – 30, 2025</div>
       </div>
-      <div class="manifest-body">
-        <ul>
-          <li>Supported daily operational activities across departments, gaining exposure to warehouse operations and inventory control.</li>
-          <li>Assisted with inventory management, helping maintain accurate stock records and order readiness.</li>
-          <li>Coordinated vehicle deliveries with internal teams, contributing to timely dispatch and customer satisfaction.</li>
-          <li>Supported customer service operations, strengthening cross-functional coordination and communication.</li>
-        </ul>
-      </div>
+      <ul>
+        <li>Supported daily operational activities across departments, gaining exposure to warehouse operations and inventory control.</li>
+        <li>Assisted with inventory management, helping maintain accurate stock records and order readiness.</li>
+        <li>Coordinated vehicle deliveries with internal teams, contributing to timely dispatch and customer satisfaction.</li>
+        <li>Supported customer service operations, strengthening cross-functional coordination and communication.</li>
+      </ul>
     </div>
   </div>
 </section>
 
-<section id="competencies">
+<section id="education" class="reveal">
   <div class="wrap">
-    <div class="sec-head"><span class="idx">02</span><h2>Core Competencies</h2><div class="sec-rule"></div></div>
-    <div class="chip-row">
-      <span class="chip">Last Mile Logistics Operations</span>
-      <span class="chip">Supply Chain Coordination</span>
-      <span class="chip">Dispatch &amp; Transportation Management</span>
-      <span class="chip">Data Analysis &amp; MIS Reporting</span>
-      <span class="chip">Process Improvement</span>
-    </div>
-  </div>
-</section>
-
-<section id="skills">
-  <div class="wrap">
-    <div class="sec-head"><span class="idx">03</span><h2>Technical Skills</h2><div class="sec-rule"></div></div>
-    <div class="skill-grid">
-      <div class="skill-card">
-        <h4>Microsoft Excel</h4>
-        <span class="level">ADVANCED</span>
-        <p>VLOOKUP, XLOOKUP, IF, SUMIF, Pivot Tables, Data Validation, Conditional Formatting.</p>
-      </div>
-      <div class="skill-card">
-        <h4>ERPNext</h4>
-        <span class="level">WORKING</span>
-        <p>Purchase Order management, invoice &amp; delivery note creation, dispatch management.</p>
-      </div>
-      <div class="skill-card">
-        <h4>Power BI</h4>
-        <span class="level">WORKING</span>
-        <p>Dashboard creation, data visualization, KPI reporting.</p>
-      </div>
-      <div class="skill-card">
-        <h4>Google Sheets</h4>
-        <span class="level">WORKING</span>
-        <p>Data analysis, MIS reporting, formula-based automation.</p>
-      </div>
-      <div class="skill-card">
-        <h4>MS Office Suite</h4>
-        <span class="level">WORKING</span>
-        <p>Word, PowerPoint, Outlook.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="certifications">
-  <div class="wrap">
-    <div class="sec-head"><span class="idx">04</span><h2>Certifications</h2><div class="sec-rule"></div></div>
-    <div class="cert-grid">
-      <div class="cert"><h4>Microsoft Excel (Advanced)</h4><span>Certification</span></div>
-      <div class="cert"><h4>Microsoft Power BI</h4><span>Certification</span></div>
-      <div class="cert"><h4>Lean Six Sigma Yellow Belt</h4><span>Certification</span></div>
-      <div class="cert"><h4>Supply Chain Analytics</h4><span>Certification</span></div>
-    </div>
-  </div>
-</section>
-
-<section id="education">
-  <div class="wrap">
-    <div class="sec-head"><span class="idx">05</span><h2>Education</h2><div class="sec-rule"></div></div>
+    <div class="eyebrow">Education</div>
+    <h2 class="sec-title" style="margin-bottom:36px;">Education</h2>
     <div class="edu-card">
-      <div>
-        <h3>Bachelor of Commerce — Logistics &amp; Supply Chain Management</h3>
-        <div class="school">Bangalore University</div>
+      <h3>Bachelor of Commerce (B.Com.)</h3>
+      <div class="field">Logistics &amp; Supply Chain Management</div>
+      <div class="school">Bangalore University | 2021 – 2024</div>
+    </div>
+  </div>
+</section>
+
+<section id="skills" class="soft reveal">
+  <div class="wrap">
+    <div class="eyebrow">Expertise</div>
+    <h2 class="sec-title" style="margin-bottom:36px;">Skills &amp; Expertise</h2>
+
+    <div class="skill-block">
+      <h4>Core Competencies</h4>
+      <div class="chip-row">
+        <span class="chip">Last Mile Logistics Operations</span>
+        <span class="chip">Supply Chain Coordination</span>
+        <span class="chip">Dispatch &amp; Transportation Management</span>
+        <span class="chip">Data Analysis &amp; MIS Reporting</span>
+        <span class="chip">Process Improvement</span>
       </div>
-      <div class="dates">2021 – 2024</div>
     </div>
 
-    <div class="lang-row">
-      <span class="lang-pill">English</span>
-      <span class="lang-pill">Malayalam</span>
-      <span class="lang-pill">Tamil</span>
+    <div class="skills-cols">
+      <div class="skill-block">
+        <h4>Technical Skills</h4>
+        <div class="tool-list">
+          <div class="tool-row"><span class="name">Microsoft Excel</span><span class="lvl">Advanced</span></div>
+          <div class="tool-row"><span class="name">ERPNext</span><span class="lvl">Working</span></div>
+          <div class="tool-row"><span class="name">Power BI</span><span class="lvl">Working</span></div>
+          <div class="tool-row"><span class="name">Google Sheets</span><span class="lvl">Working</span></div>
+          <div class="tool-row"><span class="name">MS Office Suite</span><span class="lvl">Working</span></div>
+        </div>
+      </div>
+
+      <div class="skill-block">
+        <h4>Certifications</h4>
+        <div class="cert-grid">
+          <div class="cert-card">
+            <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z"/><path d="M8.5 13.5 7 21l5-2.5L17 21l-1.5-7.5"/></svg></div>
+            <span>Microsoft Excel (Advanced)</span>
+          </div>
+          <div class="cert-card">
+            <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z"/><path d="M8.5 13.5 7 21l5-2.5L17 21l-1.5-7.5"/></svg></div>
+            <span>Microsoft Power BI</span>
+          </div>
+          <div class="cert-card">
+            <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z"/><path d="M8.5 13.5 7 21l5-2.5L17 21l-1.5-7.5"/></svg></div>
+            <span>Lean Six Sigma Yellow Belt</span>
+          </div>
+          <div class="cert-card">
+            <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z"/><path d="M8.5 13.5 7 21l5-2.5L17 21l-1.5-7.5"/></svg></div>
+            <span>Supply Chain Analytics</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="skill-block" style="margin-top:36px;">
+      <h4>Languages</h4>
+      <div class="chip-row">
+        <span class="chip">English</span>
+        <span class="chip">Malayalam</span>
+        <span class="chip">Tamil</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="reveal">
+  <div class="wrap">
+    <div class="eyebrow">Contact</div>
+    <h2 class="sec-title" style="margin-bottom:36px;">Get In Touch</h2>
+
+    <div class="contact-grid">
+      <div class="contact-card">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg></div>
+        <h4>Email</h4>
+        <a href="mailto:mebinmajo720@gmail.com">mebinmajo720@gmail.com</a>
+      </div>
+      <div class="contact-card">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
+        <h4>Phone</h4>
+        <a href="tel:+919562271474">+91 95622 71474</a>
+      </div>
+      <div class="contact-card">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6Z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></div>
+        <h4>LinkedIn</h4>
+        <a href="https://linkedin.com/in/mebin-majo" target="_blank" rel="noopener">mebin-majo</a>
+      </div>
+    </div>
+
+    <div class="cta-banner">
+      <h3>Open to New Opportunities</h3>
+      <p>I'm actively looking for Operations, Logistics, Supply Chain, and MIS Executive roles — feel free to reach out if there's a fit.</p>
+      <a class="btn btn-primary" href="mailto:mebinmajo720@gmail.com">Say Hello</a>
     </div>
   </div>
 </section>
 
 <footer>
-  <div class="wrap">
-    <div class="eyebrow">CONTACT</div>
-    <h2>Let's Connect</h2>
-    <p>Open to Operations, Logistics, Supply Chain, and MIS Executive roles.</p>
-    <div class="contact-row">
-      <a class="contact-pill" href="tel:+919562271474">+91 95622 71474</a>
-      <a class="contact-pill" href="mailto:mebinmajo720@gmail.com">mebinmajo720@gmail.com</a>
-      <a class="contact-pill" href="https://linkedin.com/in/mebin-majo" target="_blank" rel="noopener">linkedin.com/in/mebin-majo</a>
-    </div>
-  </div>
+  Mebin Majo · Bengaluru, Karnataka, India
 </footer>
+
+<script>
+  (function(){
+    var start = new Date(2025, 11, 1); // December 2025
+    var now = new Date();
+    var months = (now.getFullYear() - start.getFullYear()) * 12 + (now.getMonth() - start.getMonth());
+    if (now.getDate() < start.getDate()) months--;
+    if (months < 1) months = 1;
+    var label = months < 12 ? months + " Months" : (Math.floor(months/12) + "y " + (months%12) + "mo");
+    var el = document.getElementById('tenureStat');
+    if (el) el.textContent = label;
+  })();
+
+  (function(){
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      document.querySelectorAll('.reveal, .reveal-stagger').forEach(function(e){ e.classList.add('in-view'); });
+      return;
+    }
+    var targets = document.querySelectorAll('.reveal, .reveal-stagger');
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    targets.forEach(function(t){ io.observe(t); });
+  })();
+</script>
 
 </body>
 </html>
